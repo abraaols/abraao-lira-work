@@ -16,11 +16,13 @@ npm install
 
 # copia variáveis de ambiente
 cp .env.example .env
-# edite .env com seus dados
+# edite .env com seus dados reais
 
 # sobe servidor de dev em http://localhost:4321
 npm run dev
 ```
+
+> O arquivo `.env` real não vai para o GitHub. Ele fica só no seu computador e nas variáveis de ambiente da Vercel.
 
 ## 2. Personalizar conteúdo
 
@@ -52,9 +54,20 @@ A foto entra em `public/portrait.jpg` (proporção 4:5 recomendada). Enquanto n�
 1. Salve `+34 644 51 95 23` nos seus contatos como "CallMeBot"
 2. Envie a mensagem `I allow callmebot to send me messages` pra esse número pelo WhatsApp
 3. Aguarde a resposta com sua API key (chega em alguns minutos)
-4. No `.env`, preencha:
-   - `CALLMEBOT_PHONE` = seu número com DDI, sem + (ex: `5547999999999`)
-   - `CALLMEBOT_API_KEY` = a chave que recebeu
+4. Crie seu arquivo local a partir do exemplo:
+
+```bash
+cp .env.example .env
+```
+
+5. No `.env`, preencha os dados reais:
+
+```env
+CALLMEBOT_PHONE=5515981194064
+CALLMEBOT_API_KEY=SUA_CHAVE_REAL_AQUI
+```
+
+> Nunca suba o arquivo `.env` real para o GitHub. Ele contém sua API key.
 
 > **Alternativa profissional:** se quiser usar a WhatsApp Business API direto (a mesma que você usa no trabalho), me chama que adapto o endpoint pra Meta Graph API.
 
@@ -76,11 +89,16 @@ git push -u origin main
 1. Acesse [vercel.com/new](https://vercel.com/new)
 2. `Import` no repositório
 3. Framework: **Astro** (auto-detectado)
-4. Em `Environment Variables`, adicione as três do `.env`:
-   - `SHEETS_WEBHOOK_URL`
-   - `CALLMEBOT_PHONE`
-   - `CALLMEBOT_API_KEY`
-5. `Deploy`
+4. Em `Environment Variables`, adicione as variáveis do `.env`:
+
+   | Nome | Valor |
+   |------|-------|
+   | `SHEETS_WEBHOOK_URL` | URL do Apps Script, se for usar Google Sheets |
+   | `CALLMEBOT_PHONE` | Seu número com DDI, sem `+`, espaços ou hífens |
+   | `CALLMEBOT_API_KEY` | Sua chave real do CallMeBot |
+
+5. Salve as variáveis para o ambiente `Production`
+6. Faça um novo deploy
 
 Em 1-2 minutos o site tá no ar em `seu-projeto.vercel.app`.
 
@@ -138,7 +156,8 @@ abraaolira-work/
 ├── sheets-webhook.gs    → cole no Apps Script
 ├── astro.config.mjs
 ├── vercel.json
-└── .env.example
+├── .env.example         → modelo seguro, pode ir para o GitHub
+└── .gitignore           → impede o envio do `.env` real
 ```
 
 ## 7. Próximos passos sugeridos
