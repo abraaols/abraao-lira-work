@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Abraão Lira — Sites, landing pages e SaaS para profissionais liberais',
+  description = 'Construo presença digital sob medida para advogados, médicos e profissionais liberais que querem se destacar online. Sites, landing pages, SaaS e automações.',
+  image = '/og.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Abraão Lira" />
+    <meta name="keywords" content="criação de sites, landing page, desenvolvimento web, SaaS, Camboriú, Balneário Camboriú, Santa Catarina, sites para advogados, sites para médicos" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:locale" content="pt_BR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Abraão Lira",
+      "url": "https://abraaolira.work",
+      "jobTitle": "Desenvolvedor & Designer Web",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Camboriú",
+        "addressRegion": "SC",
+        "addressCountry": "BR"
+      },
+      "knowsAbout": ["Desenvolvimento Web", "Landing Pages", "SaaS", "Automação", "WhatsApp Business API"]
+    })} />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Reveal on scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

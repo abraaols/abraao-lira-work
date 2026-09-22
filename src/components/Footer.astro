@@ -1,0 +1,46 @@
+---
+import { site } from '@/data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__col footer__col--brand">
+      <a href="/" class="footer__logo">
+        <span class="footer__logo-mark">A</span>
+        <span>abraão<span class="footer__logo-accent">lira</span>.work</span>
+      </a>
+      <p class="footer__about">
+        Desenvolvimento web independente para profissionais liberais e pequenos negócios em todo o Brasil. Baseado em Camboriú, Santa Catarina.
+      </p>
+    </div>
+
+    <div class="footer__col">
+      <span class="mono footer__col-label">Site</span>
+      <ul class="footer__links">
+        <li><a href="/#trabalhos" class="link-underline">Trabalhos</a></li>
+        <li><a href="/#servicos" class="link-underline">Serviços</a></li>
+        <li><a href="/#sobre" class="link-underline">Sobre</a></li>
+        <li><a href="/#faq" class="link-underline">FAQ</a></li>
+        <li><a href="/#contato" class="link-underline">Contato</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <span class="mono footer__col-label">Onde me achar</span>
+      <ul class="footer__links">
+        <li><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" class="link-underline">WhatsApp</a></li>
+        <li><a href={`mailto:${site.email}`} class="link-underline">Email</a></li>
+        <li><a href={site.github} target="_blank" rel="noopener" class="link-underline">GitHub</a></li>
+        {site.linkedin && <li><a href={site.linkedin} target="_blank" rel="noopener" class="link-underline">LinkedIn</a></li>}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__legal">
+    <span class="mono">© {year} · Abraão Lira</span>
+    <span class="mono footer__legal-tag">construído com Astro & Vercel · disponível em <span lang="en">EN-US</span> sob demanda</span>
+  </div>
+</footer>
+
+

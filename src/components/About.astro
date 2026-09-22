@@ -1,0 +1,78 @@
+---
+import { site } from '@/data/site';
+---
+
+<section id="sobre" class="about" aria-labelledby="about-title">
+  <div class="container">
+    <header class="about__head">
+      
+      <h2 id="about-title" class="about__title">
+        Quem faz.
+      </h2>
+    </header>
+
+    <div class="about__grid">
+      <div class="about__visual reveal">
+        <div class="about__portrait">
+          <!-- Para trocar a foto: coloque o arquivo em /public e defina site.portrait em src/data/site.ts -->
+          <div class="about__portrait-frame">
+            {site.portrait ? (
+              <img
+                src={site.portrait}
+                alt={`Retrato de ${site.name}`}
+                class="about__portrait-img"
+                width="640"
+                height="800"
+                loading="lazy"
+              />
+            ) : (
+              <>
+                <span class="about__monogram">AL</span>
+                
+              </>
+            )}
+          </div>
+          <div class="about__caption mono">
+            <span>{site.location}</span>
+            <span>2024 — agora</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about__copy reveal">
+        <p class="about__lede">
+          Sou <strong>Abraão Lira</strong>, dev e analista técnico em uma SaaS brasileira de comunicação omnichannel. Estudo Sistemas de Informação na UNIAVAN e construo projetos próprios em paralelo.
+        </p>
+
+        <p>
+          Trabalho na ponta da engenharia e na ponta do cliente — vejo onde as integrações quebram, onde o usuário trava, o que faz uma página converter ou não. Isso me dá uma perspectiva diferente da maioria dos freelas: não entrego só pixel bonito, entrego um produto que funciona e que você consegue manter.
+        </p>
+
+        <p>
+          Meu interesse principal é <em>presença digital pra profissionais liberais</em> — gente que vende confiança, não produto de prateleira. Quem precisa de um site que respeite a seriedade da profissão mas não pareça igual ao do concorrente.
+        </p>
+
+        <dl class="about__stats">
+          <div>
+            <dt class="mono">Stack</dt>
+            <dd>React, Astro, Node, Postgres, Vercel</dd>
+          </div>
+          <div>
+            <dt class="mono">Especialidade</dt>
+            <dd>WhatsApp Business API, automação, IA</dd>
+          </div>
+          <div>
+            <dt class="mono">Localização</dt>
+            <dd>Camboriú · SC · remoto BR</dd>
+          </div>
+          <div>
+            <dt class="mono">Resposta</dt>
+            <dd>WhatsApp em até 3h úteis</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+

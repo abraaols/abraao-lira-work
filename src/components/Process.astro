@@ -1,0 +1,68 @@
+---
+const steps = [
+  {
+    num: '01',
+    title: 'Conversa inicial',
+    duration: '30 min',
+    description: 'A gente conversa pelo WhatsApp ou videochamada. Você fala do seu trabalho, do seu cliente, do que tá te incomodando. Eu pergunto coisas chatas pra evitar suposições erradas.',
+  },
+  {
+    num: '02',
+    title: 'Proposta + escopo',
+    duration: '2 a 3 dias',
+    description: 'Mando uma proposta clara: o que vou entregar, em quanto tempo, quanto custa. Sem upsell escondido, sem "depois a gente vê". Você aprova ou ajusta.',
+  },
+  {
+    num: '03',
+    title: 'Construção',
+    duration: '1 a 4 semanas',
+    description: 'Trabalho em ciclos curtos com prévia visual já no primeiro dia. Você acompanha pelo link de staging. Mudanças durante o processo são bem-vindas.',
+  },
+  {
+    num: '04',
+    title: 'Lançamento + acompanhamento',
+    duration: '30 dias inclusos',
+    description: 'Subo o site, configuro domínio, conecto Analytics e WhatsApp. Os 30 dias seguintes têm suporte incluso pra ajustes, dúvidas e medições.',
+  },
+];
+---
+
+<section class="relative py-32 noise">
+  <div class="container-page">
+    <div class="grid md:grid-cols-12 gap-6 mb-20 items-end reveal">
+      <div class="md:col-span-7">
+        <div class="label-mono mb-4 flex items-center gap-3">
+          <span class="font-mono text-accent">/03</span>
+          <span class="w-8 h-px bg-ink-300"></span>
+          <span>Como funciona</span>
+        </div>
+        <h2 class="font-display font-light text-5xl md:text-6xl leading-[0.95] tracking-tight">
+          Quatro etapas. <em class="font-medium">Sem mistério.</em>
+        </h2>
+      </div>
+      <p class="md:col-span-4 md:col-start-9 text-ink-400 text-sm leading-relaxed">
+        Trabalho 1:1 com cada cliente. Não é agência, não tem atendimento, não tem gerente intermediário.
+        Você fala comigo direto, do primeiro contato à manutenção.
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="space-y-px bg-ink/10 rounded-3xl overflow-hidden border border-ink/10">
+      {steps.map((s, i) => (
+        <div class="bg-cream p-8 md:p-10 grid md:grid-cols-12 gap-6 items-start group hover:bg-cream/50 transition-colors reveal" style={`animation-delay: ${i * 0.08}s`}>
+          <div class="md:col-span-1 font-display text-5xl font-light text-accent group-hover:scale-110 transition-transform origin-left">
+            {s.num}
+          </div>
+          <div class="md:col-span-7">
+            <h3 class="font-display text-3xl font-medium mb-3 leading-tight">{s.title}</h3>
+            <p class="text-ink-400 leading-relaxed max-w-md">{s.description}</p>
+          </div>
+          <div class="md:col-span-3 md:col-start-10 md:text-right">
+            <div class="label-mono mb-1">Duração</div>
+            <div class="font-display text-2xl">{s.duration}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

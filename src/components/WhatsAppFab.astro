@@ -1,0 +1,124 @@
+---
+import { site } from '@/data/site';
+
+const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+  'Oi Abraão! Vi seu site e quero um orçamento pro meu projeto.'
+)}`;
+---
+
+<a
+  href={waLink}
+  class="wa-fab"
+  target="_blank"
+  rel="noopener"
+  aria-label="Orçar projeto pelo WhatsApp"
+  data-wa-fab
+>
+  <span class="wa-fab__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+      <path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.91-7.02ZM12.04 20.15h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23a8.2 8.2 0 0 1 8.23 8.24c0 4.54-3.69 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/>
+    </svg>
+  </span>
+  <span class="wa-fab__label">Orçar projeto</span>
+</a>
+
+<style>
+  .wa-fab {
+    position: fixed;
+    right: clamp(1rem, 4vw, 2rem);
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 1.25rem 0.75rem 0.875rem;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #fff;
+    background: var(--ink);
+    border: 1px solid #ffffff30;
+    border-radius: 999px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+      box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1),
+      opacity 0.4s ease, visibility 0.4s ease;
+    transform: translateY(120%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .wa-fab.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .wa-fab:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow);
+    background: var(--ink-soft);
+  }
+
+  .wa-fab__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wa-fab__label {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 560px) {
+    .wa-fab {
+      padding: 0.875rem;
+      border-radius: 50%;
+      box-shadow: var(--shadow);
+    }
+    .wa-fab:hover {
+      box-shadow: var(--shadow);
+    }
+    .wa-fab__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wa-fab {
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transform: none;
+    }
+    .wa-fab.is-visible {
+      transform: none;
+    }
+    .wa-fab:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // Mostra o botão depois que o usuário rola além do hero,
+  // pra não competir com o CTA principal logo na abertura.
+  const fab = document.querySelector<HTMLElement>('[data-wa-fab]');
+  if (fab) {
+    const toggle = () => {
+      if (window.scrollY > window.innerHeight * 0.6) {
+        fab.classList.add('is-visible');
+      } else {
+        fab.classList.remove('is-visible');
+      }
+    };
+    toggle();
+    window.addEventListener('scroll', toggle, { passive: true });
+  }
+</script>

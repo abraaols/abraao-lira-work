@@ -1,0 +1,39 @@
+---
+import { services } from '@/data/site';
+---
+
+<section id="servicos" class="services" aria-labelledby="services-title">
+  <div class="container">
+    <header class="services__head">
+      
+      <h2 id="services-title" class="services__title">
+        O que eu construo.
+      </h2>
+    </header>
+
+    <ul class="services__list">
+      {services.map((s, i) => (
+        <li class="service reveal" style={`transition-delay: ${i * 60}ms;`}>
+          <div class="service__top">
+            <span class="mono service__num">{s.num}</span>
+            <span class="mono service__price">{s.priceFrom === 'sob orçamento' ? 'Sob orçamento' : `A partir de ${s.priceFrom}`}</span>
+          </div>
+          <h3 class="service__title">{s.title}</h3>
+          <p class="service__desc">{s.description}</p>
+          <ul class="service__deliv">
+            {s.deliverables.map((d) => (
+              <li>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                  <path d="M1 5L4 8L9 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+                </svg>
+                {d}
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+

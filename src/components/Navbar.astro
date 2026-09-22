@@ -1,0 +1,35 @@
+---
+import { site } from '@/data/site';
+
+const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+  'Oi Abraão, vi seu site e quero conversar sobre um projeto.'
+)}`;
+---
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo" aria-label="Abraão Lira — página inicial"><span class="nav__logo-mark">A</span><span>abraãolira.work</span></a>
+    <nav class="nav__desktop" aria-label="Navegação principal">
+      <a href="/#trabalhos">Trabalhos</a><a href="/#servicos">Serviços</a><a href="/#sobre">Sobre</a>
+      <a href={waLink} class="btn nav__cta" target="_blank" rel="noopener">Conversar</a>
+    </nav>
+    <details class="nav__mobile">
+      <summary aria-label="Menu de navegação"><span class="nav__hamburger" aria-hidden="true"></span></summary>
+      <nav aria-label="Navegação mobile"><a href="/#trabalhos">Trabalhos</a><a href="/#servicos">Serviços</a><a href="/#sobre">Sobre</a><a href="/#contato">Contato</a><a href={waLink} class="btn" target="_blank" rel="noopener">Conversar</a></nav>
+    </details>
+  </div>
+</header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.nav__mobile');
+  if (menu) {
+    const trigger = menu.querySelector('summary');
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { menu.open = false; }));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.open) { menu.open = false; trigger?.focus(); }
+    });
+    document.addEventListener('click', event => {
+      if (event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+    });
+    matchMedia('(min-width: 761px)').addEventListener('change', event => { if (event.matches) menu.open = false; });
+  }
+</script>

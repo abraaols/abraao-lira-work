@@ -1,0 +1,124 @@
+
+        .cf-form {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+        .cf-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem 1.25rem;
+        }
+        .cf-field {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+        }
+        .cf-field--span {
+          grid-column: 1 / -1;
+        }
+        .cf-label {
+          font-family: var(--font-body);
+          font-size: 0.8125rem;
+          letter-spacing: 0.05em;
+          text-transform: none;
+          color: var(--ink);
+        }
+        .cf-form input,
+        .cf-form select,
+        .cf-form textarea {
+          font-family: var(--font-body);
+          font-size: 1rem;
+          padding: 0.875rem 1rem;
+          background: var(--paper);
+          border: 1px solid var(--rule-strong);
+          border-radius: 12px;
+          color: var(--ink);
+          width: 100%;
+          transition: border-color 0.15s, background 0.15s;
+          appearance: none;
+          -webkit-appearance: none;
+        }
+        .cf-form select {
+          background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 5L6 8L9 5' stroke='%230F0F0E' stroke-width='1.5' fill='none' stroke-linecap='square'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 1rem center;
+          padding-right: 2.5rem;
+        }
+        .cf-form textarea {
+          resize: vertical;
+          min-height: 120px;
+          font-family: var(--font-body);
+          line-height: 1.55;
+        }
+        .cf-form input:focus,
+        .cf-form select:focus,
+        .cf-form textarea:focus {
+          outline: none;
+          border-color: var(--ink);
+          background: var(--paper-warm);
+        }
+        .cf-form ::placeholder { color: rgba(15, 15, 14, 0.4); }
+        .cf-error {
+          font-size: 0.875rem;
+          color: var(--accent);
+          padding: 0.75rem 1rem;
+          background: rgba(255, 61, 46, 0.08);
+          border-left: 3px solid var(--accent);
+        }
+        .cf-actions {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+          margin-top: 0.5rem;
+          flex-wrap: wrap;
+        }
+        .cf-submit:disabled {
+          opacity: 0.6;
+          cursor: progress;
+        }
+        .cf-or {
+          font-family: var(--font-body);
+          font-size: 0.75rem;
+          color: var(--muted);
+        }
+        .cf-wa {
+          font-size: 0.9375rem;
+        }
+        .cf-success {
+          padding: 2.5rem 1.5rem;
+          border: 1px solid var(--rule);
+          border-radius: 20px;
+          background: var(--paper);
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.75rem;
+        }
+        .cf-success__mark {
+          color: var(--accent);
+          margin-bottom: 0.5rem;
+        }
+        .cf-success__title {
+          font-family: var(--font-display);
+          font-size: 1.75rem;
+          letter-spacing: -0.02em;
+          font-weight: 400;
+        }
+        .cf-success__body {
+          color: var(--muted);
+          max-width: 44ch;
+          line-height: 1.55;
+        }
+        .cf-success__cta {
+          margin-top: 0.75rem;
+          font-weight: 500;
+          color: var(--accent);
+          border-bottom: 1.5px solid currentColor;
+          padding-bottom: 2px;
+        }
+        @media (max-width: 640px) {
+          .cf-grid { grid-template-columns: 1fr; }
+        }
+      

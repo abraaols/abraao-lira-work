@@ -1,0 +1,27 @@
+---
+import FeatureIcon from './FeatureIcon.astro';
+import { principles } from '@/data/site';
+---
+
+<section class="principles" aria-labelledby="principles-title">
+  <div class="container">
+    <header class="principles__head">
+      
+      <h2 id="principles-title" class="principles__title">
+        Como eu trabalho<span class="principles__title-accent">.</span>
+      </h2>
+    </header>
+
+    <div class="principles__grid">
+      {principles.map((p, i) => (
+        <article class="principle reveal" style={`transition-delay: ${i * 80}ms;`}>
+          <span class="principle__num"><FeatureIcon index={i} /></span>
+          <h3 class="principle__title">{p.title}</h3>
+          <p class="principle__body">{p.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+

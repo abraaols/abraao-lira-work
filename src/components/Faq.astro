@@ -1,0 +1,33 @@
+---
+import { faqs } from '@/data/site';
+---
+
+<section id="faq" class="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <header class="faq__head">
+      
+      <h2 id="faq-title" class="faq__title">
+        Dúvidas comuns.
+      </h2>
+    </header>
+
+    <div class="faq__list">
+      {faqs.map((f, i) => (
+        <details class="faq__item reveal" style={`transition-delay: ${i * 60}ms;`}>
+          <summary class="faq__q">
+            <span class="mono faq__q-num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="faq__q-text">{f.q}</span>
+            <span class="faq__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M6 8L10 12L14 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+              </svg>
+            </span>
+          </summary>
+          <p class="faq__a">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+

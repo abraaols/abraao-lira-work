@@ -1,0 +1,72 @@
+---
+import { projects } from '@/data/site';
+import ProjectMock from '@/components/ProjectMock.astro';
+const featured = projects.find((p) => p.featured);
+const rest = projects.filter((p) => !p.featured);
+---
+
+<section id="trabalhos" class="works" aria-labelledby="works-title">
+  <div class="container">
+    <header class="works__head">
+      <div>
+        
+        <h2 id="works-title" class="works__title">
+          Trabalhos selecionados.
+        </h2>
+      </div>
+      <p class="works__intro">
+        Projetos que cobrem o que costumo entregar: presença digital, integração com APIs, automação e produto. Clique pra detalhes.
+      </p>
+    </header>
+
+    {featured && (
+      <a href={`/projetos/${featured.slug}`} class="work-featured reveal">
+        <div class="work-featured__visual">
+          <span class="mono work-featured__tagline">{featured.tagline}</span>
+          <div class="work-featured__preview">
+            <ProjectMock preview={featured.preview} url={featured.url} slug={featured.slug} height="auto" />
+          </div>
+        </div>
+        <div class="work-featured__body">
+          <h3 class="work-featured__title">{featured.title}</h3>
+          <p class="work-featured__desc">{featured.description}</p>
+          <div class="work-featured__meta">
+            <ul class="work-featured__stack">
+              {featured.stack.map((s) => <li>{s}</li>)}
+            </ul>
+            <span class="work-featured__cta">
+              Ver case
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </a>
+    )}
+
+    {rest.length > 0 && (
+    <div class="works__grid">
+      {rest.map((p, i) => (
+        <a href={`/projetos/${p.slug}`} class="work-card reveal" style={`transition-delay: ${i * 80}ms;`}>
+          <div class="work-card__top">
+            <span class="mono">{p.tagline}</span>
+            <span class="work-card__arrow" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 14 14" fill="none">
+                <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+              </svg>
+            </span>
+          </div>
+          <h3 class="work-card__title">{p.title}</h3>
+          <p class="work-card__desc">{p.description}</p>
+          <ul class="work-card__stack">
+            {p.stack.map((s) => <li>{s}</li>)}
+          </ul>
+        </a>
+      ))}
+    </div>
+    )}
+  </div>
+</section>
+
+

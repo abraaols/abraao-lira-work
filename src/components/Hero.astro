@@ -1,0 +1,23 @@
+---
+import { site } from '@/data/site';
+
+const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+  'Oi Abraão, vi seu site e quero conversar sobre um projeto.'
+)}`;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__inner">
+    <p class="hero__meta">Camboriú · SC <span aria-hidden="true">/</span> Desenvolvimento web</p>
+    <h1 id="hero-title" class="hero__title">Sites que param de<br class="hero__break" /> parecer <s>templates</s> e <span>começam a converter.</span></h1>
+    <p class="hero__lede">Desenvolvimento de sites, landing pages e SaaS sob medida para advogados, médicos e profissionais liberais que querem se diferenciar — sem visual genérico de modelo pronto.</p>
+    <div class="hero__actions">
+      <a href="#trabalhos" class="btn">Ver trabalhos <span aria-hidden="true">→</span></a>
+      <a href={waLink} class="btn btn--ghost" target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
+    </div>
+    <ul class="hero__stack" aria-label="Tecnologias">
+      {['React','Next.js','Astro','Node','WhatsApp Business API','Pluggy','Supabase','Vercel'].map((item) => <li>{item}</li>)}
+    </ul>
+    <p class="hero__availability">{site.availability}</p>
+  </div>
+</section>

@@ -1,0 +1,435 @@
+---
+import Base from '@/layouts/Base.astro';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
+import ProjectMock from '@/components/ProjectMock.astro';
+import { projects } from '@/data/site';
+
+const { slug } = Astro.params;
+const project = projects.find((p) => p.slug === slug);
+
+if (!project) {
+  return Astro.redirect('/');
+}
+
+const others = projects.filter((p) => p.slug !== project.slug);
+const nextProject = others[0];
+---
+
+<Base title={`${project.title} — abraãolira.work`} description={project.description}>
+  <Navbar />
+  <main id="main-content" class="case">
+
+    <!-- Breadcrumb -->
+    <div class="container case__breadcrumb">
+      <a href="/#trabalhos" class="case__back">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M11 3L3 11M3 11H9M3 11V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+        </svg>
+        Todos os trabalhos
+      </a>
+      <span class="mono case__breadcrumb-sep">/</span>
+      <span class="mono">{project.slug}</span>
+    </div>
+
+    <!-- Hero do case -->
+    <header class="case__hero">
+      <div class="container case__hero-inner">
+        <div class="case__hero-meta">
+          <span class="mono case__tagline">{project.tagline}</span>
+          {project.url && (
+            <a href={project.url} target="_blank" rel="noopener" class="case__live-badge">
+              <span class="case__live-dot" aria-hidden="true"></span>
+              <span class="mono">ao vivo</span>
+            </a>
+          )}
+        </div>
+        <h1 class="case__title">{project.title}</h1>
+      </div>
+    </header>
+
+    <!-- Layout principal: mockup + sidebar -->
+    <div class="container case__body">
+
+      <!-- Mockup do site -->
+      <div class="case__mockup-wrap">
+        <ProjectMock preview={project.preview} url={project.url} slug={project.slug} />
+        <div class="case__mockup-shadow" aria-hidden="true"></div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="case__sidebar">
+        <div class="case__sidebar-block">
+          <span class="mono case__sidebar-label">Sobre o projeto</span>
+          <p class="case__desc">{project.description}</p>
+        </div>
+        <div class="case__sidebar-block">
+          <span class="mono case__sidebar-label">Stack utilizada</span>
+          <ul class="case__stack">
+            {project.stack.map((s) => (
+              <li class="case__stack-item">
+                <span class="case__stack-icon" aria-hidden="true">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <path d="M1 5L4 8L9 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+                  </svg>
+                </span>
+                {s}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="case__sidebar-block">
+          <span class="mono case__sidebar-label">Entregáveis</span>
+          <ul class="case__deliverables">
+            {project.deliverables.map((d) => <li>{d}</li>)}
+          </ul>
+        </div>
+        {project.results && project.results.length > 0 && (
+          <div class="case__sidebar-block">
+            <span class="mono case__sidebar-label">Resultados</span>
+            <ul class="case__results">
+              {project.results.map((r) => (
+                <li class="case__result">
+                  <span class="case__result-value">{r.value}</span>
+                  <span class="case__result-label">{r.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <div class="case__sidebar-block">
+          <span class="mono case__sidebar-label">Categoria</span>
+          <span class="case__category">{project.category}</span>
+        </div>
+        {project.url && (
+          <a href={project.url} target="_blank" rel="noopener" class="btn case__cta-btn">
+            Visitar site ao vivo
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+            </svg>
+          </a>
+        )}
+        <a href="/#contato" class="btn btn--ghost case__contact-btn">
+          Quero um site assim
+        </a>
+      </aside>
+    </div>
+
+    {project.testimonial && (
+      <div class="container">
+        <figure class="case__testimonial">
+          <blockquote class="case__quote">“{project.testimonial.quote}”</blockquote>
+          <figcaption class="case__quote-author">— {project.testimonial.author}</figcaption>
+        </figure>
+      </div>
+    )}
+
+    {nextProject && (
+      <div class="container">
+        <a href={`/projetos/${nextProject.slug}`} class="case__next">
+          <span class="mono case__next-label">próximo projeto</span>
+          <span class="case__next-title">{nextProject.title}</span>
+          <span class="case__next-arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 14 14" fill="none">
+              <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    )}
+
+    <!-- Footer CTA -->
+    <div class="case__footer-cta">
+      <div class="container case__footer-cta-inner">
+        <p class="mono case__footer-label">pronto para o próximo passo?</p>
+        <h2 class="case__footer-title">
+          Vamos construir<br/><em>algo assim juntos.</em>
+        </h2>
+        <a href="/#contato" class="btn">
+          Falar sobre meu projeto
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .case { padding-bottom: 0; }
+
+  .case__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  .case__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    transition: color 0.15s;
+  }
+
+  .case__back:hover { color: var(--ink); }
+  .case__breadcrumb-sep { opacity: 0.4; }
+
+  .case__hero {
+    padding: clamp(2.5rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3.5rem);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .case__hero-inner { max-width: 860px; }
+
+  .case__hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .case__tagline { color: var(--muted); }
+
+  .case__live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(46, 184, 114, 0.4);
+    background: rgba(46, 184, 114, 0.08);
+    color: #1a8a4a;
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    transition: background 0.15s;
+  }
+
+  .case__live-badge:hover { background: rgba(46, 184, 114, 0.15); }
+
+  .case__live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #2eb872;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(46,184,114,0.6); }
+    50% { box-shadow: 0 0 0 6px rgba(46,184,114,0); }
+  }
+
+  .case__title {
+    font-size: clamp(3rem, 9vw, 7rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 650;
+  }
+
+  .case__body {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 4rem;
+    align-items: start;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+  }
+
+  .case__mockup-wrap { position: relative; }
+
+
+  .case__mockup-shadow {
+    position: absolute;
+    inset: 8px -8px -8px 8px;
+    background: var(--ink);
+    z-index: 0;
+  }
+
+  .case__sidebar {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 100px;
+  }
+
+  .case__sidebar-block {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .case__sidebar-label { color: var(--muted); font-size: 0.6875rem; }
+
+  .case__desc {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .case__stack { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .case__stack-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--ink);
+  }
+
+  .case__stack-icon { color: var(--accent); flex-shrink: 0; }
+
+  .case__deliverables {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  .case__deliverables li::before { content: '— '; color: var(--accent); }
+
+  .case__category {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .case__results {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .case__result {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .case__result-value {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+  }
+
+  .case__result-label {
+    font-size: 0.75rem;
+    line-height: 1.25;
+    color: var(--muted);
+  }
+
+  .case__cta-btn { margin-top: 1.75rem; width: 100%; justify-content: center; }
+  .case__contact-btn { margin-top: 0.75rem; width: 100%; justify-content: center; }
+
+  /* Mockup acima da sombra projetada */
+  .case__mockup-wrap > :global(.mock) {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Depoimento */
+  .case__testimonial {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4rem) 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .case__quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .case__quote-author {
+    margin-top: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--muted);
+  }
+
+  /* Próximo projeto */
+  .case__next {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: clamp(1.75rem, 4vw, 2.5rem) 0;
+    border-top: 1px solid var(--rule);
+    color: var(--ink);
+    transition: color 0.2s;
+  }
+
+  .case__next:hover { color: var(--accent); }
+
+  .case__next-label {
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .case__next-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    flex: 1;
+  }
+
+  .case__next-arrow { transition: transform 0.2s; }
+  .case__next:hover .case__next-arrow { transform: translate(4px, -4px); }
+
+  .case__footer-cta {
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(4rem, 9vw, 7rem) 0;
+  }
+
+  .case__footer-cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .case__footer-label { color: rgba(244, 241, 234, 0.5); }
+
+  .case__footer-title {
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    font-weight: 650;
+    color: var(--paper);
+  }
+
+  .case__footer-title em {
+    color: var(--accent);
+    font-style: italic;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144;
+  }
+
+  @media (max-width: 960px) {
+    .case__body { grid-template-columns: 1fr; gap: 3rem; }
+    .case__sidebar { position: static; border-top: 1px solid var(--rule); padding-top: 2rem; }
+    .case__cta-btn, .case__contact-btn { width: auto; }
+    .case__next-label { display: none; }
+  }
+</style>
