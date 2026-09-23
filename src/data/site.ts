@@ -1,14 +1,14 @@
 export const site = {
   name: 'Abraão Lira',
-  availability: 'Aceitando 5 projetos · ago/2026',
-  domain: 'abraãolira.work',
+  availability: 'Aceitando 5 projetos · set/2026',
+  domain: 'abraaolira.work',
   domainAscii: 'abraaolira.work',
   url: 'https://abraaolira.work',
   description:
     'Desenvolvimento de sites, landing pages e web design sob medida para profissionais liberais e escritórios — Camboriú/SC.',
   location: 'Camboriú · SC · Brasil',
-  whatsapp: '5547992068483',
-  whatsappLabel: '+55 47 99206-8483',
+  whatsapp: '5515981194064',
+  whatsappLabel: '+55 15 98119-4064',
   email: 'abralirasilva@gmail.com', // troque quando o Zoho estiver configurado
   github: 'https://github.com/abraaols',
   linkedin: '',
